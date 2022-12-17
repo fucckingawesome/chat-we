@@ -8,7 +8,7 @@ body {
     height: 100vh;
     color: black;
     background-color: #010d18;
-/*     text-shadow:1px 1px #010100; */
+    text-shadow:1px 1px #010100;
 
 }
 
@@ -54,7 +54,7 @@ body {
 }
 .theirs .message__bubble {
   background: #6363bf;
-  color: black;
+  color: #808080;
 }
 .mine .message__bubble {
   background: #aea;
