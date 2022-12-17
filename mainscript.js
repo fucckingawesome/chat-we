@@ -78,8 +78,8 @@ function sendMessage() {
     }//
     $('input').val('')
 
-    db.collection('chat').add(data).then( function(docRef) {
-        console.log(docRef.id);
+    db.collection('chat_test').add(data).then( function(docRef) {
+        //console.log(docRef.id);
         
     }).catch( function(error) {
         console.log(error)
@@ -97,8 +97,34 @@ $('input').keypress(function(event) {
 
   
   //lisen to DB changes . onSnapshot() works everytime data changed from anywhere  
-  db.collection("chat").orderBy("time").onSnapshot((querySnapshot) => { //this methods reads data from DB and calls addMessage2DOM
+  db.collection("chat_test").orderBy("time").onSnapshot((querySnapshot) => { //this methods reads data from DB and calls addMessage2DOM
     console.log("querySnapshot.docs.length: " + querySnapshot.docs.length);
+
+    function spawn(theBody, theIcon, theTitle) {
+        const options = {
+          body: theBody,
+          icon: theIcon
+        };
+        
+        const notification = new Notification(theTitle, options);  
+    
+    }
+
+    function moNotify() {
+        const identify = $('.message').last().find('.message__name').html()
+        
+        if (identify === localStorage.getItem('NAME')) {
+            //
+            console.log('ok');
+        } else {
+           spawn('','', identify)
+            console.log(identify)
+        }   
+        //
+    }
+
+    setTimeout(moNotify, 2000)
+
     //querySnapshot.forEach((doc) => {  //if you want all
     querySnapshot.docChanges().forEach((change) => {  //if you want only changes
       addMessage2DOM(change.doc.data(), change.doc.id);
@@ -106,23 +132,5 @@ $('input').keypress(function(event) {
     });
   
   });
-  
 
-  function moNotify() {
-    const identify = $('.message').last().find('.message__name').html()
-    
-    if (identify === localStorage.getItem('NAME')) {
-        //
-        
-    } else {
-        //
-        function spawnNotification(body, icon, title) {
-            const notification = new Notification(title, { body, icon });
-          }
 
-        spawnNotification('', '', identify)
-        
-    }
-  }
-
-  setInterval(moNotify, 10000)
