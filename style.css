@@ -54,7 +54,7 @@ body {
 }
 .theirs .message__bubble {
   background: #6363bf;
-  color: white;
+  color: black;
 }
 .mine .message__bubble {
   background: #aea;
